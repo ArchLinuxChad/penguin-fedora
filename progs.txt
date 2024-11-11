@@ -10,3 +10,8 @@ virt-manager
 qemu
 htop
 mpv
+pavucontrol
+g++
+libXinerama-devel
+libX11-devel
+libXft-devel

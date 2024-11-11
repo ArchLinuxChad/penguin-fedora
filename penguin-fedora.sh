@@ -45,8 +45,22 @@ disk_check() {
   [[ "$SPACE" -ln 5 ]] && echo "You do not have enough disk space" && exit 1
 }
 
+install_font() {
+  cd $HOMEDIR/Downloads
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/SpaceMono.zip
+  [[ ! -d $HOMEDIR/.local/share/fonts ]] && mkdir $HOMEDIR/.local/share/fonts
+  mv $HOMEDIR/Downloads/SpaceMono.zip $HOMEDIR/.local/share/fonts/
+  cd $HOMEDIR/.local/share/fonts
+  unzip SpaceMono.zip
+  rm OFL.txt
+  rm README.md
+}
+
 # check if there is enough disk space
 disk_check
+
+# install depencies
+install_deps $(cat progs.txt)
 
 # create and build suckless apps
 cd $HOMEDIR
@@ -65,5 +79,11 @@ clone_scripts
 cd $GITREPO/scripts
 ./setupscripts.sh &
 
+# install fonts
+install_font 
+
 # rip out gdm and replace with .xinitrc
 sudo systemctl disable gdm.service
+
+# reboot the system
+sudo reboot now
