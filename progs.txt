@@ -1,0 +1,12 @@
+git
+vim
+nitrogen
+make
+patch
+@base-x
+arandr 
+acpi
+virt-manager
+qemu
+htop
+mpv
