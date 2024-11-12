@@ -56,6 +56,15 @@ install_font() {
   rm README.md
 }
 
+ufw_firewall() {
+  sudo systemctl disable firewalld.service --now
+  sudo dnf remove firewalld -y
+  sudo ufw default allow outgoing
+  sudo ufw default deny incoming
+  sudo ufw enable
+  sudo systemctl enable ufw.service --now
+}
+
 # check if there is enough disk space
 disk_check
 
@@ -81,6 +90,9 @@ cd $GITREPO/scripts
 
 # install fonts
 install_font 
+
+# make ufw firewall
+ufw_firewall
 
 # rip out gdm and replace with .xinitrc
 sudo systemctl disable gdm.service

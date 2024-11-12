@@ -15,3 +15,4 @@ g++
 libXinerama-devel
 libX11-devel
 libXft-devel
+ufw
